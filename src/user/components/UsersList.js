@@ -2,6 +2,8 @@ import React from "react";
 
 import UserItem from "./UserItem";
 
+import classes from "./UsersList.module.css";
+
 const UsersList = (props) => {
   if (props.items.length === 0) {
     return (
@@ -12,7 +14,7 @@ const UsersList = (props) => {
   }
 
   return (
-    <ul className="users-list">
+    <ul className={classes.usersList}>
       {props.items.map((user) => (
         <UserItem
           key={user.id}
