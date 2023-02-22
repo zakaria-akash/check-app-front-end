@@ -9,7 +9,7 @@ const UsersList = (props) => {
   if (props.items.length === 0) {
     return (
       <Card>
-        <div className="center">
+        <div className={`center ${classes.usersList}`}>
           <h2>No user found!</h2>
         </div>
       </Card>

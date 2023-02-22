@@ -5,6 +5,7 @@ import "./App.css";
 import User from "./user/pages/user";
 import NewPlace from "./places/pages/NewPlace";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
+import UserPlaces from "./places/pages/UserPlaces";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<User />} />
           <Route path="places/new" element={<NewPlace />} />
+          <Route path="/:userId/places" element={<UserPlaces />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </main>
