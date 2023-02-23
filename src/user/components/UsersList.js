@@ -1,18 +1,26 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import UserItem from "./UserItem";
 import Card from "../../shared/components/UIElements/Card";
 
 import classes from "./UsersList.module.css";
+import CustomButton from "../../shared/components/FormElements/CustomButton";
 
 const UsersList = (props) => {
   if (props.items.length === 0) {
     return (
-      <Card>
-        <div className={`center ${classes.usersList}`}>
-          <h2>No user found!</h2>
-        </div>
-      </Card>
+      <Fragment>
+        <Card className={`center ${classes.noUserCard}`}>
+          <div>
+            <h2>No user found. </h2>
+          </div>
+        </Card>
+        <Card className={`center ${classes.noUserCard}`}>
+          <CustomButton danger size="big">
+            Add User
+          </CustomButton>
+        </Card>
+      </Fragment>
     );
   }
 

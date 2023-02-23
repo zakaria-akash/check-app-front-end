@@ -1,19 +1,26 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from "./PlaceItem";
+import CustomButton from "../../shared/components/FormElements/CustomButton";
 
 import classes from "./PlaceList.module.css";
 
 const PlaceList = (props) => {
   if (props.items.length === 0) {
     return (
-      <Card>
-        <div className={`${classes.placeList} center`}>
-          <h2>No places found. You can create one.</h2>
-          <button>Share Place</button>
-        </div>
-      </Card>
+      <Fragment>
+        <Card className={`center ${classes.noPlaceCard}`}>
+          <div>
+            <h2>No places found. You can create one. </h2>
+          </div>
+        </Card>
+        <Card className={`center ${classes.noPlaceCard}`}>
+          <CustomButton danger size="big">
+            Share Place
+          </CustomButton>
+        </Card>
+      </Fragment>
     );
   }
 

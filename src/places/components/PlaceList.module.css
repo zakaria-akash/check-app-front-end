@@ -5,3 +5,12 @@
   width: 90%;
   max-width: 40rem;
 }
+.noPlaceCard {
+  background: blanchedalmond;
+  border-radius: 0%;
+  border: none;
+  box-shadow: none;
+  padding-top: 0;
+  font-size: larger;
+  font-weight: bolder;
+}

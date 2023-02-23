@@ -8,3 +8,13 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.noUserCard {
+  background: blanchedalmond;
+  border-radius: 0%;
+  border: none;
+  box-shadow: none;
+  padding-top: 0;
+  font-size: larger;
+  font-weight: bolder;
+}
