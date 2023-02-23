@@ -35,17 +35,22 @@
   border-top: 1px solid #ccc;
 }
 
-.placeItem__modal-content {
+.placeItem__modal_content {
   padding: 0;
 }
 
-.placeItem__modal-actions {
+.placeItem__modal_actions {
   text-align: right;
 }
 
 .placeItem__actions button,
 .placeItem__actions a {
   margin: 0.5rem;
+}
+
+.mapContainer {
+  height: 15rem;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
