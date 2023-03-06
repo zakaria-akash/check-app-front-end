@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 
 import { validate } from "../../utils/Validators";
 
@@ -30,6 +30,14 @@ const NewPlaceInputForm = (props) => {
     isTouched: false,
     isValid: false,
   });
+
+  const { id, onInput } = props;
+  const { value, isValid } = inputState;
+
+  useEffect(() => {
+    onInput(id, value, isValid);
+  }, [id, value, isValid, onInput]);
+
   const inputChangeHandler = (e) => {
     dispatch({
       type: "CHANGE",
@@ -49,7 +57,7 @@ const NewPlaceInputForm = (props) => {
         id={props.id}
         type={props.type}
         placeholder={props.placeholder}
-        value={inputState.value}
+        value={inputState.value || ""}
         onChange={inputChangeHandler}
         onBlur={inputTouchHandler}
       />
@@ -57,7 +65,7 @@ const NewPlaceInputForm = (props) => {
       <textarea
         id={props.id}
         rows={props.rows || 5}
-        value={inputState.value}
+        value={inputState.value || ""}
         onChange={inputChangeHandler}
         onBlur={inputTouchHandler}
       />
