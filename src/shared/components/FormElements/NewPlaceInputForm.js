@@ -26,9 +26,9 @@ const inputReducer = (state, action) => {
 
 const NewPlaceInputForm = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    vlue: "",
+    value: props.initialValue || "",
     isTouched: false,
-    isValid: false,
+    isValid: props.initialValid || false,
   });
 
   const { id, onInput } = props;

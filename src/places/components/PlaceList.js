@@ -16,7 +16,7 @@ const PlaceList = (props) => {
           </div>
         </Card>
         <Card className={`center ${classes.noPlaceCard}`}>
-          <CustomButton danger size="big">
+          <CustomButton to="/places/new" danger size="big">
             Share Place
           </CustomButton>
         </Card>

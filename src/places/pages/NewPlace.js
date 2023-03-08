@@ -1,7 +1,8 @@
-import React, { useCallback, useReducer } from "react";
+import React from "react";
 import CustomButton from "../../shared/components/FormElements/CustomButton";
 
 import NewPlaceInputForm from "../../shared/components/FormElements/NewPlaceInputForm";
+import { useCustomFormHook } from "../../shared/custom-hooks/custom-form-hook";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
@@ -9,37 +10,56 @@ import {
 
 import classes from "./NewPlace.module.css";
 
-const formReducer = (state, action) => {
-  switch (action.type) {
-    case "INPUT_CHANGE":
-      let formIsValid = true;
-      for (const inputId in state.inputs) {
-        if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.isValid;
-        } else {
-          formIsValid = formIsValid && state.inputs[inputId].isValid;
-        }
-      }
-      return {
-        ...state,
-        inputs: {
-          ...state.inputs,
-          [action.inputId]: {
-            value: action.value,
-            isValid: action.isValid,
-          },
-        },
-        isValid: formIsValid,
-      };
+// const formReducer = (state, action) => {
+//   switch (action.type) {
+//     case "INPUT_CHANGE":
+//       let formIsValid = true;
+//       for (const inputId in state.inputs) {
+//         if (inputId === action.inputId) {
+//           formIsValid = formIsValid && action.isValid;
+//         } else {
+//           formIsValid = formIsValid && state.inputs[inputId].isValid;
+//         }
+//       }
+//       return {
+//         ...state,
+//         inputs: {
+//           ...state.inputs,
+//           [action.inputId]: {
+//             value: action.value,
+//             isValid: action.isValid,
+//           },
+//         },
+//         isValid: formIsValid,
+//       };
 
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };
 
 const NewPlace = () => {
-  const [formState, dispatch] = useReducer(formReducer, {
-    inputs: {
+  // const [formState, dispatch] = useReducer(formReducer, {
+  //   inputs: {
+  //     title: {
+  //       value: "",
+  //       isValid: false,
+  //     },
+  //     description: {
+  //       value: "",
+  //       isValid: false,
+  //     },
+  //     //not required initially now, but added for consistency
+  //     address: {
+  //       value: "",
+  //       isValid: false,
+  //     },
+  //   },
+  //   isValid: false,
+  // });
+
+  const [formState, inputHandler] = useCustomFormHook(
+    {
       title: {
         value: "",
         isValid: false,
@@ -54,17 +74,17 @@ const NewPlace = () => {
         isValid: false,
       },
     },
-    isValid: false,
-  });
+    false
+  );
 
-  const inputHandler = useCallback((id, value, isValid) => {
-    dispatch({
-      type: "INPUT_CHANGE",
-      value: value,
-      isValid: isValid,
-      inputId: id,
-    });
-  }, []);
+  // const inputHandler = useCallback((id, value, isValid) => {
+  //   dispatch({
+  //     type: "INPUT_CHANGE",
+  //     value: value,
+  //     isValid: isValid,
+  //     inputId: id,
+  //   });
+  // }, []);
 
   const newPlaceSubmitHandler = (e) => {
     e.preventDefault();
