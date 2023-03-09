@@ -137,36 +137,38 @@ const UpdatePlace = () => {
   }
 
   return (
-    <form className={classes.placeForm} onSubmit={updatePlaceSubmitHandler}>
-      <NewPlaceInputForm
-        id="title"
-        element="input"
-        type="text"
-        label="Title"
-        validators={[VALIDATOR_REQUIRE()]}
-        onInput={inputHandler}
-        errorText="Please enter a valid title!"
-        initialValue={formState.inputs.title.value}
-        initialValid={formState.inputs.title.isValid}
-      />
-      <NewPlaceInputForm
-        id="description"
-        element="textarea"
-        label="Description"
-        validators={[VALIDATOR_MINLENGTH(5)]}
-        onInput={inputHandler}
-        errorText="Please enter description at least 5 characters!"
-        initialValue={formState.inputs.description.value}
-        initialValid={formState.inputs.description.isValid}
-      />
-      <CustomButton
-        danger
-        size="big"
-        type="submit"
-        disabled={!formState.isValid}
-      >
-        Update Place
-      </CustomButton>
+    <form onSubmit={updatePlaceSubmitHandler}>
+      <Card className={classes.placeForm}>
+        <NewPlaceInputForm
+          id="title"
+          element="input"
+          type="text"
+          label="Title"
+          validators={[VALIDATOR_REQUIRE()]}
+          onInput={inputHandler}
+          errorText="Please enter a valid title!"
+          initialValue={formState.inputs.title.value}
+          initialValid={formState.inputs.title.isValid}
+        />
+        <NewPlaceInputForm
+          id="description"
+          element="textarea"
+          label="Description"
+          validators={[VALIDATOR_MINLENGTH(5)]}
+          onInput={inputHandler}
+          errorText="Please enter description at least 5 characters!"
+          initialValue={formState.inputs.description.value}
+          initialValid={formState.inputs.description.isValid}
+        />
+        <CustomButton
+          danger
+          size="big"
+          type="submit"
+          disabled={!formState.isValid}
+        >
+          Update Place
+        </CustomButton>
+      </Card>
     </form>
   );
 };

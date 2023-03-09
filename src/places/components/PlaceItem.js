@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 
 import Card from "../../shared/components/UIElements/Card";
 import CustomButton from "../../shared/components/FormElements/CustomButton";
@@ -6,8 +6,10 @@ import Modal from "../../shared/components/UIElements/Modal";
 import Map from "../../shared/components/UIElements/Map";
 
 import classes from "./PlaceItem.module.css";
+import { AuthContext } from "../../shared/context/auth-context";
 
 const PlaceItem = (props) => {
+  const AuthCtx = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showDeleteConfirmModal, setShowDeleteConfirmModal] = useState(false);
 
@@ -82,10 +84,14 @@ const PlaceItem = (props) => {
             <CustomButton inverse onClick={openMapHandler}>
               VIEW ON MAP
             </CustomButton>
-            <CustomButton to={`/places/${props.id}`}>EDIT</CustomButton>
-            <CustomButton danger onClick={showDeleteConfirmHandler}>
-              DELETE
-            </CustomButton>
+            {AuthCtx.isLoggedIn && (
+              <CustomButton to={`/places/${props.id}`}>EDIT</CustomButton>
+            )}
+            {AuthCtx.isLoggedIn && (
+              <CustomButton danger onClick={showDeleteConfirmHandler}>
+                DELETE
+              </CustomButton>
+            )}
           </div>
         </Card>
       </li>

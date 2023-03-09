@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import CustomButton from "../../shared/components/FormElements/CustomButton";
 import NewPlaceInputForm from "../../shared/components/FormElements/NewPlaceInputForm";
 import Card from "../../shared/components/UIElements/Card";
+import { AuthContext } from "../../shared/context/auth-context";
 import { useCustomFormHook } from "../../shared/custom-hooks/custom-form-hook";
 import {
   VALIDATOR_EMAIL,
@@ -12,6 +13,7 @@ import {
 import classes from "./authentication.module.css";
 
 const Authentication = () => {
+  const AuthCtx = useContext(AuthContext);
   const [isLogInMode, setIsLogInMode] = useState(true);
   const [formState, inputHandler, setFormData] = useCustomFormHook(
     {
@@ -30,10 +32,12 @@ const Authentication = () => {
   const authSubmitHandler = (e) => {
     e.preventDefault();
 
+    AuthCtx.logIn();
+
     console.log(formState.inputs);
-    if (formState.isValid) {
-      alert("Given data has been submitted!"); //will send this data to backend server
-    }
+    // if (formState.isValid) {
+    //   alert("Given data has been submitted!"); //will send this data to backend server
+    // }
   };
 
   const switchModeHandler = () => {

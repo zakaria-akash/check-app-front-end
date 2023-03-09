@@ -5,9 +5,9 @@
   border-radius: 6px;
   padding: 1rem;
   overflow: hidden;
-  background-color: whitesmoke;
+  background-color: blanchedalmond;
 }
 
 .card:hover {
-  background: blanchedalmond;
+  background: whitesmoke;
 }
