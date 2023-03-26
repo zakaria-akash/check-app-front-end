@@ -37,10 +37,37 @@ const Authentication = () => {
   const authSubmitHandler = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     if (isLogInMode) {
+      try {
+        const response = await fetch("http://localhost:5000/api/users/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value,
+          }),
+        });
+
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+        setIsLoading(false);
+        AuthCtx.logIn();
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+        setErrorMsg(
+          error.message ||
+            "Something went wrong, signup is not possible for now"
+        );
+      }
     } else {
       try {
-        setIsLoading(true);
         const response = await fetch("http://localhost:5000/api/users/signup", {
           method: "POST",
           headers: {
@@ -57,7 +84,6 @@ const Authentication = () => {
         if (!response.ok) {
           throw new Error(responseData.message);
         }
-        console.log(responseData);
         setIsLoading(false);
         AuthCtx.logIn();
       } catch (error) {
