@@ -18,3 +18,7 @@
   font-size: larger;
   font-weight: bolder;
 }
+
+.noUserCard:hover {
+  background: blanchedalmond;
+}

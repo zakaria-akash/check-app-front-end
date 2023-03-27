@@ -27,6 +27,16 @@ const NewPlace = () => {
         value: "",
         isValid: false,
       },
+
+      lng: {
+        value: null,
+        isValid: false,
+      },
+
+      lat: {
+        value: null,
+        isValid: false,
+      },
     },
     false
   );
@@ -48,25 +58,42 @@ const NewPlace = () => {
           type="text"
           label="Title"
           validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
           errorText="Please enter a valid title!"
+          onInput={inputHandler}
         />
         <NewPlaceInputForm
           id="description"
           element="textarea"
           label="Description"
           validators={[VALIDATOR_MINLENGTH(5)]}
-          onInput={inputHandler}
           errorText="Please enter description at least 5 characters!"
+          onInput={inputHandler}
         />
         <NewPlaceInputForm
           id="address"
           element="input"
-          type="text"
           label="Address"
           validators={[VALIDATOR_REQUIRE()]}
-          onInput={inputHandler}
           errorText="Please enter a valid address!"
+          onInput={inputHandler}
+        />
+        <NewPlaceInputForm
+          id="lng"
+          element="input"
+          type="number"
+          label="Address Longitude"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter the valid longitude for given address!"
+          onInput={inputHandler}
+        />
+        <NewPlaceInputForm
+          id="lat"
+          element="input"
+          type="number"
+          label="Address Latitude"
+          validators={[VALIDATOR_REQUIRE()]}
+          errorText="Please enter the valid latitude for given address!"
+          onInput={inputHandler}
         />
         <CustomButton
           danger

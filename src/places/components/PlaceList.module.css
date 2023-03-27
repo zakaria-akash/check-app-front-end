@@ -14,3 +14,7 @@
   font-size: larger;
   font-weight: bolder;
 }
+
+.noPlaceCard:hover {
+  background: blanchedalmond;
+}

@@ -6,6 +6,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { AuthContext } from "../../shared/context/auth-context";
 import { useCustomFormHook } from "../../shared/custom-hooks/custom-form-hook";
+import { useHttpRequest } from "../../shared/custom-hooks/custom-http-hook";
 import {
   VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
@@ -17,8 +18,8 @@ import classes from "./authentication.module.css";
 const Authentication = () => {
   const AuthCtx = useContext(AuthContext);
   const [isLogInMode, setIsLogInMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState();
+
+  const { isLoading, errorMsg, sendRequest, clearError } = useHttpRequest();
 
   const [formState, inputHandler, setFormData] = useCustomFormHook(
     {
@@ -37,62 +38,42 @@ const Authentication = () => {
   const authSubmitHandler = async (e) => {
     e.preventDefault();
 
-    setIsLoading(true);
-
     if (isLogInMode) {
       try {
-        const response = await fetch("http://localhost:5000/api/users/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        await sendRequest(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          JSON.stringify({
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
+          {
+            "Content-Type": "application/json",
+          }
+        );
 
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setIsLoading(false);
         AuthCtx.logIn();
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
-        setErrorMsg(
-          error.message ||
-            "Something went wrong, signup is not possible for now"
-        );
       }
     } else {
       try {
-        const response = await fetch("http://localhost:5000/api/users/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        await sendRequest(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
-        });
+          {
+            "Content-Type": "application/json",
+          }
+        );
 
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-        setIsLoading(false);
         AuthCtx.logIn();
       } catch (error) {
         console.log(error);
-        setIsLoading(false);
-        setErrorMsg(
-          error.message ||
-            "Something went wrong, signup is not possible for now"
-        );
       }
     }
 
@@ -126,13 +107,9 @@ const Authentication = () => {
     setIsLogInMode((preVal) => !preVal);
   };
 
-  const errorHandler = () => {
-    setErrorMsg(null);
-  };
-
   return (
     <Fragment>
-      <ErrorModal errorMsg={errorMsg} onClear={errorHandler} />
+      <ErrorModal errorMsg={errorMsg} onClear={clearError} />
       <Card className={classes.authentication}>
         {isLoading && <LoadingSpinner asOverlay />}
         <h2>Login Required!</h2>
