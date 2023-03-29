@@ -66,6 +66,7 @@ const UserPlaces = () => {
         console.log(error);
       }
     };
+    fetchSelectedPlaces();
   }, [sendRequest, userId]);
   // const selectedPlace = Sample_Places.filter(
   //   (place) => place.creator === userId
