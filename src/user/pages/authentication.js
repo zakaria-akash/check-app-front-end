@@ -40,7 +40,7 @@ const Authentication = () => {
 
     if (isLogInMode) {
       try {
-        await sendRequest(
+        const responseData = await sendRequest(
           "http://localhost:5000/api/users/login",
           "POST",
           JSON.stringify({
@@ -52,13 +52,13 @@ const Authentication = () => {
           }
         );
 
-        AuthCtx.logIn();
+        AuthCtx.logIn(responseData.user.id);
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        await sendRequest(
+        const responseData = await sendRequest(
           "http://localhost:5000/api/users/signup",
           "POST",
           JSON.stringify({
@@ -71,7 +71,7 @@ const Authentication = () => {
           }
         );
 
-        AuthCtx.logIn();
+        AuthCtx.logIn(responseData.user.id);
       } catch (error) {
         console.log(error);
       }
