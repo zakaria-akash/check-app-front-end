@@ -26,18 +26,25 @@ const PlaceList = (props) => {
 
   return (
     <ul className={classes.placeList}>
-      {props.items.map((place) => (
-        <PlaceItem
-          key={place.id}
-          id={place.id}
-          image={place.image}
-          title={place.title}
-          description={place.description}
-          address={place.address}
-          creatorId={place.creator}
-          coordinates={place.location}
-        />
-      ))}
+      {props.items.map((place) => {
+        const location = {
+          lat: place.lat,
+          lng: place.lng,
+        };
+        return (
+          <PlaceItem
+            key={place.id}
+            id={place.id}
+            image={place.image}
+            title={place.title}
+            description={place.description}
+            address={place.address}
+            creatorId={place.creator}
+            coordinates={location}
+            onDelete={props.onDeletePlace}
+          />
+        );
+      })}
     </ul>
   );
 };

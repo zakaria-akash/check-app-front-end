@@ -17,7 +17,7 @@ const NavLinks = () => {
       </li>
       {AuthCtx.isLoggedIn && (
         <li>
-          <NavLink to="/u1/places">My Places</NavLink>
+          <NavLink to={`/${AuthCtx.userId}/places`}>My Places</NavLink>
         </li>
       )}
       {AuthCtx.isLoggedIn && (

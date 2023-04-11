@@ -71,6 +71,12 @@ const UserPlaces = () => {
   // const selectedPlace = Sample_Places.filter(
   //   (place) => place.creator === userId
   // );
+
+  const onDeletePlaceHandler = (deletedPlaceId) => {
+    setSelectedPlaces((prevPlaces) =>
+      prevPlaces.filter((place) => place.id !== deletedPlaceId)
+    );
+  };
   return (
     <Fragment>
       <ErrorModal errorMsg={errorMsg} onClear={clearError} />
@@ -79,7 +85,12 @@ const UserPlaces = () => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && selectedPlaces && <PlaceList items={selectedPlaces} />}
+      {!isLoading && selectedPlaces && (
+        <PlaceList
+          items={selectedPlaces}
+          onDeletePlace={onDeletePlaceHandler}
+        />
+      )}
     </Fragment>
   );
 };

@@ -36,12 +36,12 @@ const NewPlace = () => {
       },
 
       lng: {
-        value: 0,
+        value: null,
         isValid: false,
       },
 
       lat: {
-        value: 0,
+        value: null,
         isValid: false,
       },
     },
